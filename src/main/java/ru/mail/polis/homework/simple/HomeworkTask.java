@@ -23,25 +23,22 @@ public class HomeworkTask {
      * выводим номер первой максимальной цифры (если их несколько)
      */
     public static byte maxNumber(long a) {
-        long tmp = a;
-        byte numb = 0;
-        long maxValue = 0;
-        long currentValue;
-        byte i = 1;
-        while (tmp > 0) {
-            currentValue = (tmp % 10);
-            if (currentValue > maxValue) {
-                maxValue = currentValue;
-                numb = i;
+        long numbLength = (long) Math.pow(10, (int) (Math.log10(a)));
+        int maxNumber = 0;
+        byte maxIndex = 1;
+        byte currentIndex = 1;
+        while (maxNumber != 9 && numbLength > 0)
+        {
+            int currentNumb = (int) (a / numbLength) % 10;
+            if (currentNumb > maxNumber)
+            {
+                maxNumber = currentNumb;
+                maxIndex = currentIndex;
             }
-            if (maxValue == 9) {
-                i++;
-                break;
-            }
-            tmp /= 10;
-            i++;
+            numbLength /= 10;
+            currentIndex++;
         }
-        return (byte) (i - numb);
+        return (byte) maxIndex;
     }
 
 
